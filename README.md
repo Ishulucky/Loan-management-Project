@@ -1,5 +1,3 @@
-# Loan-management-Project
-
 CREATE TABLE ms_auser(
 	auser_id serial PRIMARY KEY, 
     auser_username varchar(20) UNIQUE NOT NULL, 
@@ -48,3 +46,16 @@ Create table ms_loanApplicants(
     FOREIGN KEY (lnap_cust_id) REFERENCES ms_customers(cust_id)
 );
 SELECT * FROM ms_loanApplicants;
+
+CREATE TABLE loanApplicantsNominees(
+	lnap_id int,
+    lnap_nominee varchar(50),
+    lanp_relation varchar(50),
+    FOREIGN KEY (lnap_id) REFERENCES ms_loanApplicants(lnap_id)
+);
+SELECT * FROM loanApplicantsNominees;
+
+
+
+
+
