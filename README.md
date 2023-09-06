@@ -5,6 +5,7 @@ CREATE TABLE ms_auser(
     auser_username varchar(20) UNIQUE NOT NULL, 
     auser_password varchar(50) NOT NULL
 );
+SELECT * FROM ms_auser;
 
 CREATE TABLE ms_customers(
 	cust_id serial PRIMARY KEY,
@@ -19,9 +20,31 @@ CREATE TABLE ms_customers(
     cust_luser int, 
     FOREIGN KEY (cust_luser) REFERENCES ms_auser(auser_id)
 );
+SELECT * FROM ms_customers;
 
 CREATE TABLE ms_loantypes(
 	lnty_id serial PRIMARY KEY,
     lnty_name varchar(50),
     lnty_desc varchar(255)
 );
+SELECT * FROM ms_loantypes;
+
+Create table ms_loanApplicants(
+	lnap_id serial PRIMARY KEY,
+    lnap_cust_id int,
+    lnap_apdate date, 
+    lnap_lnty_id smallint,
+    lnap_amount numeric, 
+    lnap_emi_range_from numeric, 
+    lnap_emp_range_to numeric, 
+    lnap_nom_requested int,
+    lnap_cibil_score numeric, --updated by company
+    lnap_status varchar(4), -- INPR/APRV/RJCD
+    lnap_conclusion_remarks varchar(255),
+    lnap_processed_user int,
+    lnap_processed_date date,
+    FOREIGN KEY (lnap_processed_user) REFERENCES ms_auser(auser_id),
+    FOREIGN KEY (lnap_lnty_id) REFERENCES ms_loantypes(lnty_id),
+    FOREIGN KEY (lnap_cust_id) REFERENCES ms_customers(cust_id)
+);
+SELECT * FROM ms_loanApplicants;
